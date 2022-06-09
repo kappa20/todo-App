@@ -4,8 +4,13 @@
          :item="item"
          class="item"
          v-on:updateList="updateList"
+         :show="show"
+         v-model="show"
       />
+      
+      
    </div>
+   <button @click="show = !show">{{show ? 'Hide Completed' : 'show Completed'}}</button>
 </template>
 
 <script setup>
@@ -13,10 +18,11 @@
    import listItem from './listItem.vue';
    const props = defineProps(['items'])
    const emit = defineEmits(['updateList'])
+   const show = ref(true);
    function updateList(){
       emit("updateList")
    }
-   
+
 </script>
 
 <style scoped>

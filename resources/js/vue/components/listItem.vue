@@ -1,5 +1,5 @@
 <template>
-   <div class="item">
+   <div class="item" v-if="(!show && item.completed ? false : true)" >
       <input 
          type="checkbox"
       
@@ -12,17 +12,16 @@
       <button @click="removeItem(item.id)" class="trashcan">
          <fa icon="trash" />
       </button>
-
-      <button>Hide Completed</button>
    </div>
 
 </template>
 
 <script setup>
    import axios from "axios";
-   import {ref,onMounted}  from "vue";
-   const props = defineProps(['item'])
+   import {ref,onMounted, onUpdated}  from "vue";
+   const props = defineProps(['item','show'])
    const emit = defineEmits(['updateList'])
+ 
    // const check = ref((props.item.completed == 1  ? true : false ))
    function removeItem(id){
   
@@ -50,12 +49,16 @@
    }
 
    onMounted(()=>{
+      console.log(props.show)
       if(props.item.completed == 1){
             props.item.completed = true
       }
       else{
          props.item.completed = false
       }
+   })
+   onUpdated(()=>{
+      console.log(props.show)
    })
 </script>
 
