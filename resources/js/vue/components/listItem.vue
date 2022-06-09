@@ -49,7 +49,7 @@
    }
 
    onMounted(()=>{
-      console.log(props.show)
+   
       if(props.item.completed == 1){
             props.item.completed = true
       }
